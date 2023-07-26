@@ -1,0 +1,87 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Doğuş Etiket Dilek ve Şikayet</string>
+
+
+    <string-array name="Gruplar">
+        <item>Dilek</item>
+        <item>Şikayet</item>
+    </string-array>
+
+    <string-array name="Kisiler">
+        <item>Abdüssamed Ay</item>
+        <item>Ahmet Menteş</item>
+        <item>Ahmet Oyalı</item>
+        <item>Ali Çakır</item>
+        <item>Alper Şengül</item>
+        <item>Berat Uçar</item>
+        <item>Binnaz Koca</item>
+        <item>Burakhan Avcı</item>
+        <item>Can Berkün</item>
+        <item>Caner Şeremet</item>
+        <item>Celal Aktepe</item>
+        <item>Cemre Tan Büyük</item>
+        <item>Cenk Bayraşa</item>
+        <item>Ebru Burçin Sinanoğlu Tuğlular</item>
+        <item>Ekrem Bilgeçti</item>
+        <item>Ercan Tezcan</item>
+        <item>Gizem Kılıç</item>
+        <item>Gökçen Özaydın</item>
+        <item>Gökhan Arıkan</item>
+        <item>Güler Yaman Ilıca</item>
+        <item>Halil İbrahim Yılmaz</item>
+        <item>Hasan Karadağ</item>
+        <item>Hayat Bilgeçti</item>
+        <item>İlyas Dal</item>
+        <item>İskender Tanyıldız</item>
+        <item>Mehmet Ercengiz</item>
+        <item>Mehmet Nazım Bayraşa</item>
+        <item>Mehmet Yıldız</item>
+        <item>Mustafa Özdemir</item>
+        <item>Nafia Soyaltın Temiz</item>
+        <item>Ömer Akak</item>
+        <item>Özge Işik</item>
+        <item>Özge Kuloğlu</item>
+        <item>Özgür Örk</item>
+        <item>Ramazan Ay</item>
+        <item>Ramazan Özelçi</item>
+        <item>Ramazan Özkan</item>
+        <item>Rıfat Murat Bingöllü</item>
+        <item>Salim Örnek</item>
+        <item>Samet Görmek</item>
+        <item>Savaş Can</item>
+        <item>Sevda Tohumcu</item>
+        <item>Sevim Arıkan</item>
+        <item>Songül Yılmaz</item>
+        <item>Suzan Çelebi Ertan</item>
+        <item>Şaman Berkün</item>
+        <item>Şerife Büken</item>
+        <item>Volkan Şengil</item>
+        <item>Yunus Çiftgül</item>
+    </string-array>
+
+
+    <string-array name="Konular">
+        <item>Çalışan İlişkileri</item>
+        <item>Çalışan Memnuniyeti</item>
+        <item>Çalışma Ortamı ve Temizlik</item>
+        <item>Çalışma Şartları</item>
+        <item>Çevreye Katkı</item>
+        <item>Eşitlik ve Çeşitlilik</item>
+        <item>İletişim ve İletişim Kanalları</item>
+        <item>İş Performansı ve Değerlendirme</item>
+        <item>İş Sağlığı ve Güvenliği</item>
+        <item>İşletme Etik ve Değerler</item>
+        <item>İşletme Politikaları</item>
+        <item>Kalite</item>
+        <item>Kariyer ve Eğitim Olanakları</item>
+        <item>Müşteri Memnuniyeti</item>
+        <item>Sosyal İmkanlar ve Etkinlikler</item>
+        <item>Teknoloji ve Altyapı</item>
+        <item>Maliyet ve Gider Düşürme</item>
+        <item>Yemek ve İkramlar</item>
+        <item>Diğer</item>
+
+    </string-array>
+
+
+</resources>
