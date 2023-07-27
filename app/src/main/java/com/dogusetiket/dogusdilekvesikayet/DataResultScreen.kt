@@ -29,6 +29,7 @@ class DataResultScreen : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
         db = Room.databaseBuilder(
             this,
             DilekveSikayetDatabase::class.java,

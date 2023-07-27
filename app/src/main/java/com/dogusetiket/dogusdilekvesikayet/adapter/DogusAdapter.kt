@@ -19,7 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DogusAdapter(private val context: Context) : RecyclerView.Adapter<DogusAdapter.DogusViewHolder>() {
+class DogusAdapter(private val context: Context) :
+    RecyclerView.Adapter<DogusAdapter.DogusViewHolder>() {
     private var dilekveSikayetList: ArrayList<DilekveSikayet> = ArrayList()
     private var onClickItem: ((DilekveSikayet) -> Unit)? = null
 
@@ -46,6 +47,7 @@ class DogusAdapter(private val context: Context) : RecyclerView.Adapter<DogusAda
 
     override fun onBindViewHolder(holder: DogusViewHolder, position: Int) {
         val dilekveSikayet = dilekveSikayetList[position]
+        holder.txtId.text = dilekveSikayet.case_id.toString()
         holder.txtGroup.text = dilekveSikayet.case_group
         holder.txtCaseName.text = dilekveSikayet.case_name
         holder.txtPersonName.text = dilekveSikayet.person_name
@@ -53,6 +55,14 @@ class DogusAdapter(private val context: Context) : RecyclerView.Adapter<DogusAda
         holder.txtCaseBody.text = dilekveSikayet.case_body
         holder.txtDate.text = dilekveSikayet.date
         holder.txtStatus.text = dilekveSikayet.isChecked
+
+        if (holder.txtStatus.text == "Kabul Edildi"){
+            holder.txtStatus.setTextColor(Color.GREEN)
+        }else if (holder.txtStatus.text == "Reddedildi"){
+            holder.txtStatus.setTextColor(Color.RED)
+        }else{
+            holder.txtStatus.setTextColor(Color.parseColor("#FFA500"))
+        }
 
 
         val isVisible: Boolean = dilekveSikayet.isExpandable
@@ -72,40 +82,52 @@ class DogusAdapter(private val context: Context) : RecyclerView.Adapter<DogusAda
         ).build()
 
         holder.btnAccept.setOnClickListener {
+
+            val txtId = holder.txtId.text.toString().toIntOrNull()
+            val acceptedCase = DilekveSikayet(
+                txtId,
+                holder.txtGroup.text.toString(),
+                holder.txtCaseName.text.toString(),
+                holder.txtCaseBody.text.toString(),
+                holder.txtPersonName.text.toString(),
+                holder.txtTcNo.text.toString(),
+                holder.txtDate.text.toString(),
+                "Kabul Edildi",
+                false
+            )
+
             val run = Runnable {
-                val acceptedCase = DilekveSikayet(
-                    null,
-                    holder.txtGroup.text.toString(),
-                    holder.txtCaseName.text.toString(),
-                    holder.txtCaseBody.text.toString(),
-                    holder.txtPersonName.text.toString(),
-                    holder.txtTcNo.text.toString(),
-                    holder.txtDate.text.toString(),
-                    "Kabul Edildi", false
-                )
                 db.getDilekveSikayetDao().updateCase(acceptedCase)
             }
             Thread(run).start()
+
+            holder.txtStatus.setText("Kabul Edildi")
             holder.txtStatus.setTextColor(Color.GREEN)
+
+
         }
 
         holder.btnDecline.setOnClickListener {
 
+            val txtId = holder.txtId.text.toString().toIntOrNull()
+            val acceptedCase = DilekveSikayet(
+                txtId,
+                holder.txtGroup.text.toString(),
+                holder.txtCaseName.text.toString(),
+                holder.txtCaseBody.text.toString(),
+                holder.txtPersonName.text.toString(),
+                holder.txtTcNo.text.toString(),
+                holder.txtDate.text.toString(),
+                "Reddedildi",
+                false
+            )
+
             val run = Runnable {
-                val declinedCase = DilekveSikayet(
-                    null,
-                    holder.txtGroup.text.toString(),
-                    holder.txtCaseName.text.toString(),
-                    holder.txtCaseBody.text.toString(),
-                    holder.txtPersonName.text.toString(),
-                    holder.txtTcNo.text.toString(),
-                    holder.txtDate.text.toString(),
-                    "Reddedildi", false
-                )
-                db.getDilekveSikayetDao().updateCase(declinedCase)
+                db.getDilekveSikayetDao().updateCase(acceptedCase)
             }
             Thread(run).start()
 
+            holder.txtStatus.setText("Reddedildi")
             holder.txtStatus.setTextColor(Color.RED)
 
         }
@@ -128,6 +150,7 @@ class DogusAdapter(private val context: Context) : RecyclerView.Adapter<DogusAda
 
     class DogusViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        var txtId = view.findViewById<TextView>(R.id.txtId)
         var txtGroup = view.findViewById<TextView>(R.id.txtGroup)
         var txtCaseName = view.findViewById<TextView>(R.id.txtCaseName)
         var txtPersonName = view.findViewById<TextView>(R.id.txtPersonName)
