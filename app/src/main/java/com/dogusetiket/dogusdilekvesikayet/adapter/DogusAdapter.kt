@@ -1,6 +1,7 @@
 package com.dogusetiket.dogusdilekvesikayet.adapter
 
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.dogusetiket.dogusdilekvesikayet.R
 import com.dogusetiket.dogusdilekvesikayet.room.DilekveSikayet
 import com.dogusetiket.dogusdilekvesikayet.room.DilekveSikayetDatabase
@@ -17,11 +19,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DogusAdapter() : RecyclerView.Adapter<DogusAdapter.DogusViewHolder>() {
+class DogusAdapter(private val context: Context) : RecyclerView.Adapter<DogusAdapter.DogusViewHolder>() {
     private var dilekveSikayetList: ArrayList<DilekveSikayet> = ArrayList()
     private var onClickItem: ((DilekveSikayet) -> Unit)? = null
+
+
     // Room Database değer atama
     private lateinit var db: DilekveSikayetDatabase
+
 
     fun addItems(items: ArrayList<DilekveSikayet>) {
         this.dilekveSikayetList = items
@@ -59,14 +64,50 @@ class DogusAdapter() : RecyclerView.Adapter<DogusAdapter.DogusViewHolder>() {
             notifyItemChanged(position)
         }
 
+        // Database'e erişim
+        db = Room.databaseBuilder(
+            context,
+            DilekveSikayetDatabase::class.java,
+            "appDataBase"
+        ).build()
+
         holder.btnAccept.setOnClickListener {
+            val run = Runnable {
+                val acceptedCase = DilekveSikayet(
+                    null,
+                    holder.txtGroup.text.toString(),
+                    holder.txtCaseName.text.toString(),
+                    holder.txtCaseBody.text.toString(),
+                    holder.txtPersonName.text.toString(),
+                    holder.txtTcNo.text.toString(),
+                    holder.txtDate.text.toString(),
+                    "Kabul Edildi", false
+                )
+                db.getDilekveSikayetDao().updateCase(acceptedCase)
+            }
+            Thread(run).start()
             holder.txtStatus.setTextColor(Color.GREEN)
-            holder.txtStatus.setText("Kabul Edildi.")
         }
 
         holder.btnDecline.setOnClickListener {
+
+            val run = Runnable {
+                val declinedCase = DilekveSikayet(
+                    null,
+                    holder.txtGroup.text.toString(),
+                    holder.txtCaseName.text.toString(),
+                    holder.txtCaseBody.text.toString(),
+                    holder.txtPersonName.text.toString(),
+                    holder.txtTcNo.text.toString(),
+                    holder.txtDate.text.toString(),
+                    "Reddedildi", false
+                )
+                db.getDilekveSikayetDao().updateCase(declinedCase)
+            }
+            Thread(run).start()
+
             holder.txtStatus.setTextColor(Color.RED)
-            holder.txtStatus.setText("Reddedildi.")
+
         }
 
         holder.downArrow.setOnClickListener(clickListener)

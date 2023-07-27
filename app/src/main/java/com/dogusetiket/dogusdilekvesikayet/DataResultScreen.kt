@@ -37,8 +37,9 @@ class DataResultScreen : AppCompatActivity() {
 
         binding.dataResultRecyclerview.setHasFixedSize(true)
         binding.dataResultRecyclerview.layoutManager = LinearLayoutManager(this)
-        adapter = DogusAdapter()
+        adapter = DogusAdapter(this)
         binding.dataResultRecyclerview.adapter = adapter
+
 
 
         GlobalScope.launch(Dispatchers.IO) {
